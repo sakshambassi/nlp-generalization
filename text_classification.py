@@ -51,7 +51,6 @@ def main():
         "wnli": ("sentence1", "sentence2"),
     }
     sentence1_key, sentence2_key = task_to_keys[task]
-    preprocess_function(dataset['train'][:5])
 
     encoded_dataset = dataset.map(lambda p: preprocess_function(p, sentence2_key, tokenizer), batched=True)
     num_labels = 3 if task.startswith("mnli") else 1 if task=="stsb" else 2
@@ -81,7 +80,7 @@ def main():
 
     trainer.train()
 
-    trainer.evaluate()
+    print(trainer.evaluate())
 
 if __name__ == '__main__':
     main()
