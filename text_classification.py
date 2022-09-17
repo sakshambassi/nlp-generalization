@@ -5,7 +5,6 @@ import random
 
 from datasets import load_dataset, load_metric
 from hfsharpness.nlpsharpness import BaseTrainer, TrainingArguments
-from IPython.display import display, HTML
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 def compute_metrics(eval_pred, metric):
