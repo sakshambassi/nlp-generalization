@@ -20,7 +20,7 @@ def compute_metrics(eval_pred, metric):
         predictions = predictions[:, 0]
     return metric.compute(predictions=predictions, references=labels)
 
-def preprocess_function(examples, sentence2_key, tokenizer):
+def preprocess_function(examples, sentence1_key, sentence2_key, tokenizer):
     if sentence2_key is None:
         return tokenizer(examples[sentence1_key], truncation=True)
     return tokenizer(examples[sentence1_key], examples[sentence2_key], truncation=True)
@@ -52,7 +52,7 @@ def main():
     }
     sentence1_key, sentence2_key = task_to_keys[task]
 
-    encoded_dataset = dataset.map(lambda p: preprocess_function(p, sentence2_key, tokenizer), batched=True)
+    encoded_dataset = dataset.map(lambda p: preprocess_function(p, sentence1_key, sentence2_key, tokenizer), batched=True)
     num_labels = 3 if task.startswith("mnli") else 1 if task=="stsb" else 2
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_labels)
 
