@@ -7,12 +7,13 @@ from datasets import load_dataset, load_metric
 from hfsharpness.nlpsharpness import BaseTrainer, TrainingArguments
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-def compute_metrics(eval_pred, metric):
+def compute_metrics(eval_pred):
     """ Returns the evaluation metric based on 
     predictions and reference labels
 
     @params:    eval_pred is tuple of predictions and true labels,
     """
+    metric = load_metric("glue", "cola")
     predictions, labels = eval_pred
     if task != "stsb":
         predictions = np.argmax(predictions, axis=1)
