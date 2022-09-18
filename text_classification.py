@@ -15,10 +15,7 @@ def compute_metrics(eval_pred):
     """
     metric = load_metric("glue", "cola")
     predictions, labels = eval_pred
-    if task != "stsb":
-        predictions = np.argmax(predictions, axis=1)
-    else:
-        predictions = predictions[:, 0]
+    predictions = np.argmax(predictions, axis=1)
     return metric.compute(predictions=predictions, references=labels)
 
 def preprocess_function(examples, sentence1_key, sentence2_key, tokenizer):
@@ -28,11 +25,11 @@ def preprocess_function(examples, sentence1_key, sentence2_key, tokenizer):
 
 def main():
     GLUE_TASKS = ["cola", "mnli", "mnli-mm", "mrpc", "qnli", "qqp", "rte", "sst2", "stsb", "wnli"]
-    task = "cola"
+    TASK = "cola"
     model_checkpoint = "distilbert-base-uncased"
     batch_size = 16
 
-    actual_task = "mnli" if task == "mnli-mm" else task
+    actual_task = "mnli" if TASK == "mnli-mm" else TASK
     dataset = load_dataset("glue", actual_task)
     metric = load_metric('glue', actual_task)
     fake_preds = np.random.randint(0, 2, size=(64,))
@@ -51,25 +48,25 @@ def main():
         "stsb": ("sentence1", "sentence2"),
         "wnli": ("sentence1", "sentence2"),
     }
-    sentence1_key, sentence2_key = task_to_keys[task]
+    sentence1_key, sentence2_key = task_to_keys[TASK]
 
     encoded_dataset = dataset.map(lambda p: preprocess_function(p, sentence1_key, sentence2_key, tokenizer), batched=True)
-    num_labels = 3 if task.startswith("mnli") else 1 if task=="stsb" else 2
+    num_labels = 3 if TASK.startswith("mnli") else 1 if TASK=="stsb" else 2
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_labels)
 
-    metric_name = "pearson" if task == "stsb" else "matthews_correlation" if task == "cola" else "accuracy"
+    metric_name = "pearson" if TASK == "stsb" else "matthews_correlation" if TASK == "cola" else "accuracy"
     model_name = model_checkpoint.split("/")[-1]
 
     args = TrainingArguments(
         output_dir="./",
-        num_train_epochs=1,              # total number of training epochs
-        per_device_train_batch_size=128,  # batch size per device during training
+        num_train_epochs=5,              # total number of training epochs
+        per_device_train_batch_size=64,  # batch size per device during training
         gradient_accumulation_steps=2,
         sam=True,                        # Use sharpness aware minimization
         sam_rho=0.01,                    # Step size for SAM
         fisher_penalty_weight=0.01,      # Use Fisher penalty with this weight
     )
-    validation_key = "validation_mismatched" if task == "mnli-mm" else "validation_matched" if task == "mnli" else "validation"
+    validation_key = "validation_mismatched" if TASK == "mnli-mm" else "validation_matched" if TASK == "mnli" else "validation"
     trainer = BaseTrainer(
         model,
         args,

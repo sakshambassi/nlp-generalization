@@ -5,7 +5,7 @@
 #SBATCH --output=text_classification.out
 #SBATCH --error=error_output.err
 #SBATCH --mem=8GB
-#SBATCH --time=04:00:00
+#SBATCH --time=14:00:00
 #SBATCH --gres=gpu:1
 
 eval "$(conda shell.bash hook)"
