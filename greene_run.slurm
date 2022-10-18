@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=text_classification
+#SBATCH --job-name=xnli_fim
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=5
-#SBATCH --output=text_classification.out
-#SBATCH --error=error_output.err
-#SBATCH --mem=8GB
+#SBATCH --output=xnli_fim.out
+#SBATCH --error=xnli_fim.err
+#SBATCH --mem=32GB
 #SBATCH --time=14:00:00
 #SBATCH --gres=gpu:1
 
 eval "$(conda shell.bash hook)"
 conda activate nlp_ra
-python text_classification.py
+python xnli_bert_fim.py
