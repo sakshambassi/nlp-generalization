@@ -47,14 +47,14 @@ def preprocess_function(examples, sentence1_key, sentence2_key, tokenizer):
 
 def main():
     NUM_LABELS = 3                                      # if classification task, how many classes
-    BATCH_SIZE = 16                                      # batch_size for each training
-    # MODEL_CHECKPOINT = 'bert-base-multilingual-cased'   # model type
-    MODEL_CHECKPOINT = './checkpoint-99500'
+    BATCH_SIZE = 16                                     # batch_size for each training
+    MODEL_CHECKPOINT = 'bert-base-multilingual-cased'   # model type
+    # MODEL_CHECKPOINT = './checkpoint-99500'
     LANGUAGE = "en"                                     # language to be trained on
     DATASET = "xnli"                                    # dataset/corpus for which model needs to be finetuned
-    FISHER_PENALTY_WEIGHT = 0.001
+    FISHER_PENALTY_WEIGHT = 1.0
     USE_SAM = False
-    NUM_EPOCHS = 2
+    NUM_EPOCHS = 5
 
     tokenizer, model = initialize_model(MODEL_CHECKPOINT, NUM_LABELS)
     dataset = load_dataset(DATASET, LANGUAGE)
