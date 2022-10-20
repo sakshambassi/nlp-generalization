@@ -1,11 +1,16 @@
 import datasets
+import gc
 import numpy as np
 import pandas as pd
 import random
+import torch
 
 from datasets import load_dataset, load_metric
 from hfsharpness.nlpsharpness import BaseTrainer, TrainingArguments
 from transformers import BertTokenizer, BertModel, BertForSequenceClassification
+
+gc.collect()
+torch.cuda.empty_cache()
 
 def initialize_model(model_checkpoint, num_labels):
     """ Initializes the model and tokenizer for classification task
@@ -42,13 +47,14 @@ def preprocess_function(examples, sentence1_key, sentence2_key, tokenizer):
 
 def main():
     NUM_LABELS = 3                                      # if classification task, how many classes
-    BATCH_SIZE = 4                                      # batch_size for each training
-    MODEL_CHECKPOINT = 'bert-base-multilingual-cased'   # model type
+    BATCH_SIZE = 16                                      # batch_size for each training
+    # MODEL_CHECKPOINT = 'bert-base-multilingual-cased'   # model type
+    MODEL_CHECKPOINT = './checkpoint-99500'
     LANGUAGE = "en"                                     # language to be trained on
     DATASET = "xnli"                                    # dataset/corpus for which model needs to be finetuned
     FISHER_PENALTY_WEIGHT = 0.001
     USE_SAM = False
-    NUM_EPOCHS = 5
+    NUM_EPOCHS = 2
 
     tokenizer, model = initialize_model(MODEL_CHECKPOINT, NUM_LABELS)
     dataset = load_dataset(DATASET, LANGUAGE)
