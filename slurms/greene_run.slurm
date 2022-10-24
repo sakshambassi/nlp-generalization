@@ -8,5 +8,5 @@
 echo "Training scheduled for language : ${lang}"
 eval "$(conda shell.bash hook)"
 conda activate nlp_ra
-python $PWD/experiments/xnli_bert_fim.py \
+python $PWD/xnli_bert_fim.py \
  --language $lang
