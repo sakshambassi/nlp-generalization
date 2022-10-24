@@ -54,6 +54,7 @@ def main():
     parser.add_argument('--language', type=str, default='en')
     args = parser.parse_args()
 
+    print(f"Got language argument as {args.language}")
     NUM_LABELS = 3  # if classification task, how many classes
     BATCH_SIZE = 16  # batch_size for each training
     # MODEL_CHECKPOINT = 'bert-base-multilingual-cased'  # model type

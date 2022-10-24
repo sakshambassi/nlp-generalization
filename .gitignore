@@ -6,3 +6,4 @@ hfsharpness/
 *.err
 mbert-xnli-en-finetuned/
 .idea/
+wandb/
