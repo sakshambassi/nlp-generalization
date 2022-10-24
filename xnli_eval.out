@@ -1,0 +1,1 @@
+Evaluation on test dataset using pre-trained model: {'eval_loss': 0.4549061059951782, 'eval_accuracy': 0.8245508982035928, 'eval_runtime': 12.9652, 'eval_samples_per_second': 386.42, 'eval_steps_per_second': 48.36}
