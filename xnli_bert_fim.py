@@ -58,7 +58,7 @@ def main():
     NUM_LABELS = 3  # if classification task, how many classes
     BATCH_SIZE = 16  # batch_size for each training
     # MODEL_CHECKPOINT = 'bert-base-multilingual-cased'  # model type
-    MODEL_CHECKPOINT = '../mbert-xnli-en-finetuned'
+    MODEL_CHECKPOINT = 'mbert-xnli-en-finetuned'
     DATASET = "xnli"  # dataset/corpus for which model needs to be finetuned
     FISHER_PENALTY_WEIGHT = 1.0
     USE_SAM = False
@@ -71,7 +71,7 @@ def main():
     encoded_dataset = dataset.map(lambda p: preprocess_function(p, sentence1_key, sentence2_key, tokenizer),
                                   batched=True)
     huggingface_args = TrainingArguments(
-        output_dir=f"../langs/{args.language}",
+        output_dir=f"langs/{args.language}",
         num_train_epochs=NUM_EPOCHS,  # total number of training epochs
         per_device_train_batch_size=BATCH_SIZE,  # batch size per device during training
         gradient_accumulation_steps=2,
@@ -97,3 +97,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

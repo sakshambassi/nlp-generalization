@@ -1,0 +1,4 @@
+Training scheduled for language : th 
+Got language argument as th
+Downloading and preparing dataset xnli/th (download: 461.54 MiB, generated: 170.97 MiB, post-processed: Unknown size, total: 632.51 MiB) to /home/sb7787/.cache/huggingface/datasets/xnli/th/1.1.0/818164464f9c9fd15776ca8a00423b074344c3e929d00a2c1a84aa5a50c928bd...
+Dataset xnli downloaded and prepared to /home/sb7787/.cache/huggingface/datasets/xnli/th/1.1.0/818164464f9c9fd15776ca8a00423b074344c3e929d00a2c1a84aa5a50c928bd. Subsequent calls will reuse this data.

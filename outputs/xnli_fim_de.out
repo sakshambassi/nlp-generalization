@@ -1,0 +1,7 @@
+Training scheduled for language : de 
+Got language argument as de
+Problem at: /scratch/sb7787/nlp_ra/nlp-generalization/xnli_bert_fim.py 67 main
+Training scheduled for language : de 
+Got language argument as de
+Downloading and preparing dataset xnli/de (download: 461.54 MiB, generated: 82.18 MiB, post-processed: Unknown size, total: 543.73 MiB) to /home/sb7787/.cache/huggingface/datasets/xnli/de/1.1.0/818164464f9c9fd15776ca8a00423b074344c3e929d00a2c1a84aa5a50c928bd...
+Dataset xnli downloaded and prepared to /home/sb7787/.cache/huggingface/datasets/xnli/de/1.1.0/818164464f9c9fd15776ca8a00423b074344c3e929d00a2c1a84aa5a50c928bd. Subsequent calls will reuse this data.
