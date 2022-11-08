@@ -62,8 +62,8 @@ def main():
     print(f"Got language argument as {args.language}")
     NUM_LABELS = 3  # if classification task, how many classes
     BATCH_SIZE = 16  # batch_size for each training
-    MODEL_CHECKPOINT = 'bert-base-multilingual-cased'  # model type
-    # MODEL_CHECKPOINT = 'mbert-xnli-en-finetuned'
+    # MODEL_CHECKPOINT = 'bert-base-multilingual-cased'  # model type
+    MODEL_CHECKPOINT = 'baseline_langs/en/checkpoint-122720'
     DATASET = "xnli"  # dataset/corpus for which model needs to be finetuned
     NUM_EPOCHS = 5
 
